@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { HashRouter } from 'react-router-dom';
+import App from './components/app';
+import ScrollToTop from './components/scroll-to-top';
+import './tailwind.css';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <HashRouter basename="/">
+    <ScrollToTop />
     <App />
-  </React.StrictMode>,
+  </HashRouter>,
   document.getElementById('root')
 );
 

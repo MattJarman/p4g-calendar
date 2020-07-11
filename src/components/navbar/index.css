@@ -1,0 +1,7 @@
+.active {
+  color: white !important;
+}
+
+div.nav-dropdown {
+  top: 48px;
+}
