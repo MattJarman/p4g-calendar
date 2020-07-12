@@ -21,8 +21,12 @@ function Navbar() {
   return (
     <>
       <nav className="sticky z-30 flex flex-wrap items-center justify-between p-2 bg-teal-400 shadow-lg top-10">
-        <div className="flex items-center flex-shrink-0 mr-6 text-white ">
-          <span className="text-xl font-semibold tracking-tight">P4G</span>
+        <div className="flex items-center flex-shrink-0 mr-6 text-white">
+          <img
+            src={`${process.env.PUBLIC_URL}/icon/TV-solid.svg`}
+            alt="TV"
+            className="w-8 h-8 fill-current"
+          />
         </div>
         <div className="block lg:hidden">
           <button
