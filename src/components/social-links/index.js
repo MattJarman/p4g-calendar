@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Data from '../../storage/data.json';
 
 // TODO: Ensure transition when at bottom of page is smooth, as currently the page will snap to the top
@@ -22,7 +23,10 @@ class SocialLinks extends Component {
     return (
       <div className="h-full bg-gray-100">
         <div className="container mx-auto">
-          <p className="mb-4 ml-4 text-4xl">Social Links</p>
+          <div className="flex flex-row items-center my-4 ml-4">
+            <FontAwesomeIcon icon="user-friends" size="2x" className="mr-4" />
+            <p className="text-4xl font-bold">Social Links</p>
+          </div>
           <div className="flex flex-row flex-wrap justify-center ">
             {this.arcanaList.map((arcana) => {
               return (

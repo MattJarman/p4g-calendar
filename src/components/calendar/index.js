@@ -24,8 +24,14 @@ const MONTH_NAMES = [
 class Calendar extends Component {
   constructor(props) {
     super(props);
+    let date = props.date;
+
+    if (localStorage.getItem('date') !== null) {
+      date = new Date(localStorage.getItem('date'));
+    }
+
     this.state = {
-      date: props.date,
+      date: date,
     };
     this.originalDate = new Date(props.date.getTime());
     this.endDate = new Date(this.originalDate.getTime()).setMonth(
@@ -85,8 +91,10 @@ class Calendar extends Component {
 
     this.setState((state) => {
       let date = state.date;
+      let month = date.getMonth() + 1;
 
-      date.setMonth(date.getMonth() + 1);
+      date.setMonth(month);
+      localStorage.setItem('date', date);
       return { date: date };
     });
   }
@@ -98,8 +106,10 @@ class Calendar extends Component {
 
     this.setState((state) => {
       let date = state.date;
+      let month = date.getMonth() - 1;
 
-      date.setMonth(date.getMonth() - 1);
+      date.setMonth(month);
+      localStorage.setItem('date', date);
       return { date: date };
     });
   }
@@ -137,7 +147,7 @@ class Calendar extends Component {
               type="button"
               className={`inline-flex items-center p-1 mr-2 leading-none transition duration-100 ease-in-out rounded-md cursor-pointer focus:outline-none ${
                 this.canDecrement()
-                  ? 'bg-blue-500 hover:bg-blue-400'
+                  ? 'bg-teal-400 hover:bg-teal-500'
                   : 'bg-gray-300'
               }`}
               onClick={this.decrementMonth}
@@ -151,7 +161,7 @@ class Calendar extends Component {
               type="button"
               className={`inline-flex items-center p-1 leading-none transition duration-100 ease-in-out rounded-md cursor-pointer focus:outline-none ${
                 this.canIncrement()
-                  ? 'bg-blue-500 hover:bg-blue-400'
+                  ? 'bg-teal-400 hover:bg-teal-500'
                   : 'bg-gray-300'
               }`}
               onClick={this.incrementMonth}
@@ -246,7 +256,7 @@ function CalendarDay({ day, dateString, hasSocialLinks, disabled }) {
         {hasSocialLinks && (
           <FontAwesomeIcon
             icon="circle"
-            className="text-blue-600 text-xxs md:text-xs"
+            className="text-blue-400 text-xxs md:text-xs"
           />
         )}
       </div>

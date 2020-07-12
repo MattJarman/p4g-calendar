@@ -1,33 +1,32 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { __RouterContext } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Card from '../card';
 
-class DateInformation extends Component {
-  render() {
-    return (
-      <div className="flex flex-col mb-8 bg-white rounded-md shadow-lg">
-        <div className="flex flex-row items-center p-2 border-b-2 border-gray-300 rounded-t-md">
-          <DateIcon isNight={this.props.isNight} />
-          <div className="flex-row flex-grow text-center">
-            <p className="text-xl font-bold text-center">{this.props.avail}</p>
-          </div>
-          <DateIcon isNight={this.props.isNight} />
+function DateInformation(props) {
+  return (
+    <div className="flex flex-col mb-8 bg-white rounded-md shadow-lg">
+      <div className="flex flex-row items-center p-2 border-b-2 border-gray-200 rounded-t-md">
+        <DateIcon isNight={props.isNight} />
+        <div className="flex-row flex-grow text-center">
+          <p className="text-xl font-bold text-center">{props.avail}</p>
         </div>
-
-        <div className="">
-          <SocialLink
-            links={this.props.socialLinks}
-            isNight={this.props.isNight}
-          />
-          <Spoilers spoilers={this.props.spoilers} />
-        </div>
+        <DateIcon isNight={props.isNight} />
       </div>
-    );
-  }
+
+      <div>
+        <SocialLink links={props.socialLinks} isNight={props.isNight} />
+        <Spoilers spoilers={props.spoilers} />
+      </div>
+    </div>
+  );
 }
 
 function SocialLink({ links, isNight }) {
+  const context = useContext(__RouterContext);
+  const { location } = context;
+
   if (links === undefined || links === null || links.length === 0) {
     return null;
   }
@@ -49,6 +48,7 @@ function SocialLink({ links, isNight }) {
               }`}
               to={{
                 pathname: `/social/${link}`,
+                state: { prevPath: location.pathname },
               }}
             >
               <img
@@ -77,7 +77,7 @@ function Spoilers({ spoilers }) {
         </span>
         Spoilers / Trivia
       </p>
-      <div className="flex mx-4 my-8">
+      <div className="flex flex-wrap mx-4 my-8">
         {spoilers.map((spoiler) => {
           return <Card front={spoiler.question} back={spoiler.answer} />;
         })}

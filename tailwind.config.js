@@ -6,6 +6,10 @@ module.exports = {
         'p4-yellow': {
           '500': '#FEF600',
         },
+        'dark-pastel-green': {
+          '500': '#37BE3A',
+          '700': '#2E9E30',
+        },
       },
       fontSize: {
         xxs: '.5rem',

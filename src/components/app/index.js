@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Route } from 'react-router-dom';
 import { __RouterContext } from 'react-router';
 import { AnimatedSwitch } from 'react-router-transition';
@@ -15,15 +15,17 @@ import {
   faMoon,
   faTimes,
   faCircle,
+  faCalendar,
+  faPlay,
 } from '@fortawesome/free-solid-svg-icons';
 import { slideLeft, slideRight } from './slide-animation';
-import './index.css';
 import Navbar from '../navbar';
 import Home from '../home';
 import Calendar from '../p4g-calendar';
 import SocialLinks from '../social-links';
-import Day from '../day';
+import Date from '../date';
 import Arcana from '../arcana';
+import './index.css';
 
 library.add(
   faBars,
@@ -36,7 +38,9 @@ library.add(
   faSun,
   faMoon,
   faTimes,
-  faCircle
+  faCircle,
+  faCalendar,
+  faPlay
 );
 
 function App() {
@@ -46,26 +50,30 @@ function App() {
 
   if (prevState !== undefined) {
     let prevPath = prevState.prevPath;
-    if (prevPath === '/social' || prevPath === '/calendar/*') {
+
+    if (
+      context.location.pathname === '/' ||
+      prevPath.includes('/social') ||
+      (prevPath.includes('/calendar/') &&
+        context.location.pathname === '/calendar')
+    ) {
       slide = slideLeft;
     }
   }
 
   return (
-    <>
-      <div className="flex flex-col h-screen bg-gray-100">
-        <Navbar />
-        <main className="flex-grow">
-          <AnimatedSwitch {...slide}>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/calendar" component={Calendar} />
-            <Route exact path="/social" component={SocialLinks} />
-            <Route exact path="/social/:name" component={Arcana} />
-            <Route exact path="/calendar/:id" component={Day} />
-          </AnimatedSwitch>
-        </main>
-      </div>
-    </>
+    <div className="h-screen bg-gray-100 ">
+      <Navbar />
+      <main className="flex-grow">
+        <AnimatedSwitch {...slide}>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/calendar" component={Calendar} />
+          <Route exact path="/social" component={SocialLinks} />
+          <Route path="/social/:name" component={Arcana} />
+          <Route path="/calendar/:id" component={Date} />
+        </AnimatedSwitch>
+      </main>
+    </div>
   );
 }
 

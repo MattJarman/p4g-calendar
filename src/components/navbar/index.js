@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { __RouterContext } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './index.css';
 
 function Navbar() {
   const context = useContext(__RouterContext);
@@ -16,10 +17,11 @@ function Navbar() {
   function hide() {
     setHidden(true);
   }
+
   return (
     <>
-      <nav className="z-10 flex flex-wrap items-center justify-between p-2 bg-blue-500 shadow-md">
-        <div className="flex items-center flex-shrink-0 mr-6 text-white">
+      <nav className="sticky z-30 flex flex-wrap items-center justify-between p-2 bg-teal-400 shadow-lg top-10">
+        <div className="flex items-center flex-shrink-0 mr-6 text-white ">
           <span className="text-xl font-semibold tracking-tight">P4G</span>
         </div>
         <div className="block lg:hidden">
@@ -30,35 +32,49 @@ function Navbar() {
             <FontAwesomeIcon className="outline-none" icon="bars" />
           </button>
         </div>
-        <div className="sticky top-0 w-full lg:flex lg:items-center lg:w-auto">
+        <div className="w-full lg:flex lg:items-center lg:w-auto">
           <div className="lg:flex-grow"></div>
           <div className={`lg:flex ${hidden ? 'hidden' : ''}`}>
-            <NavLink
-              activeClassName="lg:border-b-2 active"
-              className="block mt-4 mr-6 text-white outline-none sm:inline-block sm:mt-0 hover:text-white"
+            <NavItem
               onClick={hide}
-              to={{
-                pathname: '/calendar',
-                state: { prevPath: location.pathname },
-              }}
-            >
-              Calendar
-            </NavLink>
-            <NavLink
-              activeClassName="lg:border-b-2 active"
-              className="block mt-4 mr-6 text-white outline-none sm:inline-block sm:mt-0 hover:text-white"
+              path="/"
+              prevPath={location.pathname}
+              name="Home"
+              exact={true}
+            />
+            <NavItem
               onClick={hide}
-              to={{
-                pathname: '/social',
-                state: { prevPath: location.pathname },
-              }}
-            >
-              Social Links
-            </NavLink>
+              path="/calendar"
+              prevPath={location.pathname}
+              name="Calendar"
+            />
+            <NavItem
+              onClick={hide}
+              path="/social"
+              prevPath={location.pathname}
+              name="Social Links"
+            />
           </div>
         </div>
       </nav>
     </>
+  );
+}
+
+function NavItem(props) {
+  return (
+    <NavLink
+      activeClassName="lg:border-b-2 active"
+      className="block mt-4 mr-6 font-semibold text-white outline-none sm:inline-block sm:mt-0 hover:text-white"
+      onClick={props.onClick}
+      exact={props.exact ?? false}
+      to={{
+        pathname: props.path,
+        state: { prevPath: props.prevPath },
+      }}
+    >
+      {props.name}
+    </NavLink>
   );
 }
 

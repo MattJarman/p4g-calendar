@@ -1,65 +1,67 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { animated, useTransition } from 'react-spring';
+import PageNav from '../page-nav';
+import NotFound from '../not-found';
 import Data from '../../storage/data.json';
 
 const FIRST_RANK_NAME = 'Rank 1';
 
-class Arcana extends Component {
-  constructor(props) {
-    super(props);
-    this.arcanaName = props.match.params.name;
-    this.slinks = Data.slinks;
-    this.arcana = this.slinks[this.arcanaName];
-    this.state = {
-      arcanaName: this.arcanaName,
-      arcana: this.arcana,
-    };
+function Arcana(props) {
+  const arcanaName = props.match.params.name;
+  const slinks = Data.slinks;
+  const arcanaList = Data.arcanaList;
+  const arcana = slinks[arcanaName];
+
+  function getPreviousArcana() {
+    let index = arcanaList.indexOf(arcanaName);
+
+    return arcanaList[index - 1] === undefined
+      ? arcanaList[index]
+      : arcanaList[index - 1];
   }
 
-  componentDidUpdate(prevProps) {
-    let arcanaName = this.props.match.params.name;
-    if (arcanaName !== prevProps.match.params.name) {
-      this.setState({
-        arcanaName: arcanaName,
-        arcana: this.slinks[arcanaName],
-      });
-    }
+  function getNextArcana() {
+    let index = arcanaList.indexOf(arcanaName);
+
+    return arcanaList[index + 1] === undefined
+      ? arcanaList[index]
+      : arcanaList[index + 1];
   }
 
-  render() {
-    if (this.state.arcana === undefined) {
-      return <p>404 not found</p>;
-    }
+  if (arcana === undefined) {
+    return <NotFound />;
+  }
 
-    return (
-      <div className="h-full bg-gray-100">
-        <div className="container px-4 py-4 mx-auto">
-          <div className="flex flex-row items-center my-8">
-            <div className="w-20 h-20 mr-6 bg-white rounded-md shadow-lg">
-              <img
-                src={`${process.env.PUBLIC_URL}/img/social-links/${this.state.arcanaName}.png`}
-                className="max-w-full max-h-full pt-1"
-                alt={this.state.arcana.arcana}
-              />
-            </div>
-            <div className="flex flex-col">
-              <p className="flex-grow text-5xl leading-10">
-                {this.state.arcana.arcana}
-              </p>
-              <p className="text-2xl text-gray-500">{this.state.arcana.name}</p>
-            </div>
-          </div>
-
-          <div className="flex flex-col">
-            {this.state.arcana.rank.map((rank) => {
-              return <Rank rank={rank} />;
-            })}
+  return (
+    <div className="h-full bg-gray-100">
+      <div className="container px-4 py-4 mx-auto">
+        <PageNav
+          backName="Social Links"
+          backRoute="/social"
+          prev={`/social/${getPreviousArcana()}`}
+          next={`/social/${getNextArcana()}`}
+        />
+        <div className="flex flex-row flex-wrap items-center my-8">
+          <img
+            src={`${process.env.PUBLIC_URL}/img/social-links/${arcanaName}.png`}
+            className="w-20 h-20 pt-1 mr-6 bg-white rounded-md shadow-lg"
+            alt={arcana.arcana}
+          />
+          <div className="flex flex-col mt-4">
+            <p className="flex-grow text-5xl leading-10">{arcana.arcana}</p>
+            <p className="text-2xl text-gray-500">{arcana.name}</p>
           </div>
         </div>
+
+        <div className="flex flex-col">
+          {arcana.rank.map((rank) => {
+            return <Rank rank={rank} />;
+          })}
+        </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 function Rank({ rank }) {
