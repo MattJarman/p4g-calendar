@@ -147,7 +147,7 @@ class Calendar extends Component {
               type="button"
               className={`inline-flex items-center p-1 mr-2 leading-none transition duration-100 ease-in-out rounded-md cursor-pointer focus:outline-none ${
                 this.canDecrement()
-                  ? 'bg-teal-400 hover:bg-teal-500'
+                  ? 'bg-indigo-400 hover:bg-indigo-600'
                   : 'bg-gray-300'
               }`}
               onClick={this.decrementMonth}
@@ -161,7 +161,7 @@ class Calendar extends Component {
               type="button"
               className={`inline-flex items-center p-1 leading-none transition duration-100 ease-in-out rounded-md cursor-pointer focus:outline-none ${
                 this.canIncrement()
-                  ? 'bg-teal-400 hover:bg-teal-500'
+                  ? 'bg-indigo-400 hover:bg-indigo-600'
                   : 'bg-gray-300'
               }`}
               onClick={this.incrementMonth}
@@ -179,7 +179,11 @@ class Calendar extends Component {
             {/* For each day of the week */}
             {DAY_NAMES.map((name) => {
               return (
-                <div style={{ width: '14.26%' }} className="px-2 py-2">
+                <div
+                  key={name}
+                  style={{ width: '14.26%' }}
+                  className="px-2 py-2"
+                >
                   <div className="text-xs font-bold tracking-wide text-center text-gray-600 uppercase md:text-sm">
                     {name}
                   </div>
@@ -191,6 +195,7 @@ class Calendar extends Component {
             {this.getBlankDays().map((day) => {
               return (
                 <div
+                  key={day}
                   style={{ width: '14.28%' }}
                   className="relative h-16 px-4 pt-2 border-b border-r md:h-32"
                 ></div>
@@ -203,6 +208,7 @@ class Calendar extends Component {
               if (!this.dates.includes(dateString)) {
                 return (
                   <CalendarDay
+                    key={day}
                     day={day}
                     dateString={dateString}
                     disabled={true}
@@ -211,6 +217,7 @@ class Calendar extends Component {
               }
               return (
                 <CalendarDay
+                  key={day}
                   day={day}
                   dateString={dateString}
                   hasSocialLinks={this.hasSocialLinks(dateString)}

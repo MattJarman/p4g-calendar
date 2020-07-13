@@ -56,7 +56,7 @@ function Arcana(props) {
 
         <div className="flex flex-col">
           {arcana.rank.map((rank) => {
-            return <Rank rank={rank} />;
+            return <Rank key={rank.rank ?? FIRST_RANK_NAME} rank={rank} />;
           })}
         </div>
       </div>
@@ -99,6 +99,7 @@ function Rank({ rank }) {
 
   return (
     <div
+      key={rank.rank}
       className="p-2 px-4 mb-2 bg-white border border-gray-400 rounded-sm shadow-md cursor-pointer"
       onClick={() => toggle(!expanded)}
     >

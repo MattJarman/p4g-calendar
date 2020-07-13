@@ -34,8 +34,8 @@ function Date(props) {
   }
 
   return (
-    <div style={props} className="bg-gray-100">
-      <div className="container h-screen px-4 py-8 mx-auto">
+    <div style={props} className="h-screen">
+      <div className="container px-4 py-8 mx-auto">
         <PageNav
           backName="Calendar"
           backRoute="/calendar"
@@ -55,6 +55,7 @@ function Date(props) {
               isNight={false}
               avail={day.dayAvail}
               socialLinks={day.socialLinks}
+              notes={day.dayNotes}
               spoilers={day.spoilers}
             />
             <DateInformation
@@ -62,6 +63,7 @@ function Date(props) {
               isNight={true}
               avail={day.nightAvail}
               socialLinks={day.nightLinks}
+              notes={day.nightNotes}
               spoilers={null}
             />
           </div>

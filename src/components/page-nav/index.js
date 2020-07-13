@@ -18,13 +18,13 @@ function PageNav(props) {
           }}
         >
           <FontAwesomeIcon
-            className="mr-4 text-xs text-teal-400 outline-none"
+            className="mr-4 text-xs text-indigo-600 outline-none"
             icon="chevron-left"
           />
           <span className="text-xs">{props.backName}</span>
         </Link>
       </div>
-      <div class="inline-flex">
+      <div className="inline-flex">
         <Link
           className="px-4 py-2 text-xs text-gray-800 bg-gray-300 rounded-l hover:bg-gray-400 focus:outline-none"
           to={{

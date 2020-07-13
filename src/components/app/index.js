@@ -62,7 +62,7 @@ function App() {
   }
 
   return (
-    <div className="h-screen bg-gray-100 ">
+    <div className="h-screen">
       <Navbar />
       <main className="flex-grow">
         <AnimatedSwitch {...slide}>

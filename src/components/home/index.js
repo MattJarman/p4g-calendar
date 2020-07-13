@@ -7,7 +7,7 @@ function Home() {
   const date = localStorage.getItem('date-string');
 
   return (
-    <div className="container h-full px-6 pt-8 mx-auto my-4">
+    <div className="container px-6 pt-8 mx-auto my-4 bg-gray-100">
       {date !== null && (
         <Link
           className="flex flex-row items-center justify-center w-48 py-4 mb-8 text-white duration-300 ease-in-out transform rounded-md shadow-lg hover:-translate-y-1 hover:scale-105 lg:w-64 lg:py-6 bg-dark-pastel-green-500 hover:bg-dark-pastel-green-700"
@@ -46,7 +46,7 @@ function Box(props) {
     <div className="w-full mb-4 duration-300 ease-in-out transform md:px-4 md:py-4 md:w-1/2 hover:-translate-y-1 hover:scale-105">
       <Link to={{ pathname: props.link }} className="focus:outline-none">
         <div className="overflow-hidden bg-white rounded shadow-md">
-          <img src={props.img} alt="" class="w-full" />
+          <img src={props.img} alt="" className="w-full" />
           <div className="px-6 py-4 mb-2">
             <div className="mb-2 text-2xl font-bold">{props.title}</div>
             <p className="text-sm">{props.text}</p>

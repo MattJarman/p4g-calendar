@@ -31,6 +31,7 @@ class SocialLinks extends Component {
             {this.arcanaList.map((arcana) => {
               return (
                 <Link
+                  key={arcana}
                   className="w-full p-2 mx-4 my-2 duration-300 ease-in-out transform bg-white rounded-md shadow-lg hover:-translate-y-1 hover:scale-105 md:w-3/12"
                   to={{
                     pathname: `/social/${arcana}`,

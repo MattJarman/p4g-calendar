@@ -16,6 +16,9 @@ function DateInformation(props) {
       </div>
 
       <div>
+        {props.notes !== '' && (
+          <p className="px-6 pt-4 text-sm md:text-base">{props.notes}</p>
+        )}
         <SocialLink links={props.socialLinks} isNight={props.isNight} />
         <Spoilers spoilers={props.spoilers} />
       </div>
@@ -43,6 +46,7 @@ function SocialLink({ links, isNight }) {
         {links.map((link) => {
           return (
             <Link
+              key={link}
               className={`w-24 h-24 m-2 overflow-hidden duration-300 ease-in-out transform rounded-full shadow-lg cursor-pointer hover:-translate-y-1 hover:scale-110 ${
                 isNight ? 'bg-blue-500' : 'bg-orange-500'
               }`}
@@ -78,8 +82,10 @@ function Spoilers({ spoilers }) {
         Spoilers / Trivia
       </p>
       <div className="flex flex-wrap mx-4 my-8">
-        {spoilers.map((spoiler) => {
-          return <Card front={spoiler.question} back={spoiler.answer} />;
+        {spoilers.map((spoiler, index) => {
+          return (
+            <Card key={index} front={spoiler.question} back={spoiler.answer} />
+          );
         })}
       </div>
     </div>

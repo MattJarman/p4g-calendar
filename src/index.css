@@ -8,6 +8,7 @@
 
 html {
   @apply font-body;
+  @apply bg-gray-100;
 }
 
 html,

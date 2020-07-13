@@ -20,8 +20,8 @@ function Navbar() {
 
   return (
     <>
-      <nav className="sticky z-30 flex flex-wrap items-center justify-between p-2 bg-teal-400 shadow-lg top-10">
-        <div className="flex items-center flex-shrink-0 mr-6 text-white">
+      <nav className="sticky z-30 flex flex-wrap items-center justify-between p-3 bg-indigo-600 shadow-lg top-10">
+        <div className="flex items-center flex-shrink-0 text-white">
           <img
             src={`${process.env.PUBLIC_URL}/icon/TV-solid.svg`}
             alt="TV"
@@ -69,7 +69,7 @@ function NavItem(props) {
   return (
     <NavLink
       activeClassName="lg:border-b-2 active"
-      className="block mt-4 mr-6 font-semibold text-white outline-none sm:inline-block sm:mt-0 hover:text-white"
+      className="block mt-4 mr-6 text-lg font-semibold text-white outline-none sm:inline-block sm:mt-0 hover:text-white"
       onClick={props.onClick}
       exact={props.exact ?? false}
       to={{
