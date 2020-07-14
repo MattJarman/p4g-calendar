@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { __RouterContext } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import parse from 'html-react-parser';
 import Card from '../card';
 
 function DateInformation(props) {
@@ -16,12 +17,25 @@ function DateInformation(props) {
       </div>
 
       <div>
-        {props.notes !== '' && (
-          <p className="px-6 pt-4 text-sm md:text-base">{props.notes}</p>
-        )}
+        <Notes notes={props.notes} />
         <SocialLink links={props.socialLinks} isNight={props.isNight} />
         <Spoilers spoilers={props.spoilers} />
       </div>
+    </div>
+  );
+}
+
+function Notes({ notes }) {
+  if (notes === '') {
+    return null;
+  }
+
+  return (
+    <div className="p-4 m-2">
+      <Title icon={['far', 'sticky-note']} title="Notes" />
+      <p className="ml-10 text-xs italic text-gray-800 md:text-sm">
+        {parse(notes)}
+      </p>
     </div>
   );
 }
@@ -36,12 +50,7 @@ function SocialLink({ links, isNight }) {
 
   return (
     <div className="p-4 m-2">
-      <p className="flex items-center text-xl font-bold whitespace-no-wrap">
-        <span>
-          <FontAwesomeIcon icon="user-friends" className="mr-2 text-black" />
-        </span>
-        Social Links
-      </p>
+      <Title icon="user-friends" title="Social Links" />
       <div className="flex flex-wrap justify-center mt-4 md:justify-start">
         {links.map((link) => {
           return (
@@ -75,12 +84,7 @@ function Spoilers({ spoilers }) {
 
   return (
     <div className="p-4 m-2">
-      <p className="flex items-center text-xl font-bold whitespace-no-wrap">
-        <span>
-          <FontAwesomeIcon icon="book" className="mr-2 text-black" />
-        </span>
-        Spoilers / Trivia
-      </p>
+      <Title icon="book" title="Spoilers / Trivia" />
       <div className="flex flex-wrap mx-4 my-8">
         {spoilers.map((spoiler, index) => {
           return (
@@ -88,6 +92,17 @@ function Spoilers({ spoilers }) {
           );
         })}
       </div>
+    </div>
+  );
+}
+
+function Title({ icon, title }) {
+  return (
+    <div className="flex items-center mb-2 text-xl font-bold whitespace-no-wrap">
+      <span className="flex items-center justify-center w-10">
+        <FontAwesomeIcon icon={icon} className="text-black" />
+      </span>
+      <span>{title}</span>
     </div>
   );
 }

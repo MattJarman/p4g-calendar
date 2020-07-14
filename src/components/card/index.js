@@ -11,14 +11,14 @@ function Card(props) {
 
   return (
     <div
-      className="relative w-full h-24 mx-4 mb-4 text-xs md:text-base md:w-1/3"
+      className="relative w-full h-24 mx-4 mb-4 text-xs font-bold md:text-sm md:w-1/3"
       onClick={() => set((state) => !state)}
     >
       <a.div
         className="bg-p4-yellow-500 flippable-card"
         style={{ opacity: opacity.interpolate((o) => 1 - o), transform }}
       >
-        <p className="font-semibold break-words">{props.front}</p>
+        <p className="break-words">{props.front}</p>
       </a.div>
       <a.div
         className="bg-green-500 flippable-card"

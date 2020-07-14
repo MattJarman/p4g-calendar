@@ -18,6 +18,7 @@ import {
   faCalendar,
   faPlay,
 } from '@fortawesome/free-solid-svg-icons';
+import { faStickyNote as farStickNote } from '@fortawesome/free-regular-svg-icons';
 import { slideLeft, slideRight } from './slide-animation';
 import Navbar from '../navbar';
 import Home from '../home';
@@ -31,6 +32,7 @@ library.add(
   faBars,
   faChevronLeft,
   faChevronRight,
+  farStickNote,
   faUserFriends,
   faBook,
   faCaretDown,

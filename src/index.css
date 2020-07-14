@@ -17,5 +17,5 @@ body {
 }
 
 .flippable-card {
-  @apply absolute flex items-center justify-center w-full h-full p-8 text-center rounded-md shadow-lg cursor-pointer;
+  @apply absolute flex items-center justify-center w-full h-full p-8 text-center rounded-md shadow-xl cursor-pointer;
 }

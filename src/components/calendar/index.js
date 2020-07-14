@@ -175,7 +175,7 @@ class Calendar extends Component {
         </div>
 
         <div className="-mx-1 -mb-1">
-          <div className="flex flex-wrap md:-mb-10">
+          <div className="flex flex-wrap">
             {/* For each day of the week */}
             {DAY_NAMES.map((name) => {
               return (

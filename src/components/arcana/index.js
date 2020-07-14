@@ -113,18 +113,18 @@ function Rank({ rank }) {
       {transition.map(({ item, key, props }) => {
         return (
           item && (
-            <animated.div style={props}>
+            <animated.div key={key} style={props}>
               <p className="text-sm italic">{notes}</p>
               {dialogs !== undefined &&
-                dialogs.map((dialog) => {
+                dialogs.map((dialog, index) => {
                   return (
-                    <div>
+                    <div key={index}>
                       <p className="mb-4 text-sm italic font-bold">
                         {dialog.question}
                       </p>
-                      {dialog.answers.map((answer) => {
+                      {dialog.answers.map((answer, index) => {
                         return (
-                          <div className="flex flex-row mb-2">
+                          <div key={index} className="flex flex-row mb-2">
                             <p className="flex-grow ml-8 text-sm">
                               {answer[0]}
                             </p>
